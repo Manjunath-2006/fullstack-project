@@ -1,0 +1,321 @@
+@import "tailwindcss";
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: #ffffff;
+    min-height: 100vh;
+    color: #111111;
+  }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 99px; }
+}
+
+@layer utilities {
+  /* 60% — white base */
+  .glass {
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid #e5e7eb;
+  }
+  /* 30% — light gray surfaces */
+  .surface { background: #f9fafb; border: 1px solid #e5e7eb; }
+  /* 10% — black accents */
+  .card-shadow { box-shadow: 0 2px 16px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.04); }
+  .card-shadow-lg { box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06); }
+  .accent-text { color: #111111; }
+  .muted-text  { color: #6b7280; }
+}
+
+/* ── Toggle button (uiverse Web-Potato, B&W theme) ─────────────────────── */
+.btn-toggle {
+  padding: 0.1em 0.25em;
+  width: 13em;
+  height: 4.2em;
+  background-color: #111111;
+  border: 0.08em solid #e5e7eb;
+  border-radius: 0.3em;
+  font-size: 12px;
+  cursor: pointer;
+}
+.btn-toggle span {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0.4em;
+  width: 8.25em;
+  height: 2.5em;
+  background-color: #111111;
+  border-radius: 0.2em;
+  font-size: 1.5em;
+  color: #ffffff;
+  border: 0.08em solid #e5e7eb;
+  box-shadow: 0 0.4em 0.1em 0.019em #e5e7eb;
+  transition: all 1s;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+  font-weight: 600;
+}
+.btn-toggle span:hover {
+  transition: all 0.5s;
+  transform: translate(0, 0.4em);
+  box-shadow: 0 0 0 0 #e5e7eb;
+}
+.btn-toggle.active span {
+  background-color: #374151;
+  border-color: #ffffff;
+  box-shadow: 0 0.4em 0.1em 0.019em #ffffff;
+}
+.btn-toggle.active span:hover {
+  transform: translate(0, 0.4em);
+  box-shadow: 0 0 0 0 #ffffff;
+}
+
+/* ── Sign-In button (uiverse cssbuttons-io, adapted B&W) ─────────────────── */
+.btn-signin {
+  --color: #111111;
+  font-family: inherit;
+  display: inline-block;
+  width: 100%;
+  height: 2.8em;
+  line-height: 2.7em;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border: 2px solid var(--color);
+  transition: color 0.5s;
+  z-index: 1;
+  font-size: 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--color);
+  background: transparent;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.btn-signin::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: var(--color);
+  height: 200px;
+  width: 300px;
+  border-radius: 50%;
+  top: 100%;
+  left: 100%;
+  transition: all 0.7s;
+}
+.btn-signin:hover { color: #ffffff; }
+.btn-signin:hover::before { top: -40px; left: -40px; }
+.btn-signin:active::before { background: #374151; transition: background 0s; }
+
+/* ── Add Document button (uiverse andrew-demchenk0, B&W) ────────────────── */
+.btn-add-doc {
+  position: relative;
+  width: 160px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #374151;
+  background-color: #111111;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.btn-add-doc, .btn-add-doc__icon, .btn-add-doc__text { transition: all 0.3s; }
+.btn-add-doc__text {
+  transform: translateX(22px);
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.btn-add-doc__icon {
+  position: absolute;
+  transform: translateX(120px);
+  height: 100%;
+  width: 39px;
+  background-color: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-add-doc__icon svg { width: 22px; stroke: #fff; }
+.btn-add-doc:hover { background: #374151; }
+.btn-add-doc:hover .btn-add-doc__text { color: transparent; }
+.btn-add-doc:hover .btn-add-doc__icon { width: 158px; transform: translateX(0); }
+.btn-add-doc:active .btn-add-doc__icon { background-color: #1f2937; }
+.btn-add-doc:active { border-color: #1f2937; }
+
+/* ── Submit / box button (uiverse Cornerstone-04, B&W) ──────────────────── */
+.btn-submit {
+  width: 140px;
+  height: auto;
+  float: left;
+  transition: .5s linear;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 10px 15px;
+  text-align: center;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  color: #111111;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  letter-spacing: 0.05em;
+}
+.btn-submit::before {
+  position: absolute;
+  content: '';
+  left: 0; bottom: 0;
+  height: 4px; width: 100%;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid transparent;
+  box-sizing: border-box;
+  transform: translateX(100%);
+}
+.btn-submit::after {
+  position: absolute;
+  content: '';
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  border-top: 4px solid transparent;
+  border-right: 4px solid transparent;
+  box-sizing: border-box;
+  transform: translateX(-100%);
+}
+.btn-submit:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.18); }
+.btn-submit:hover::before {
+  border-color: #111111;
+  height: 100%;
+  transform: translateX(0);
+  transition: .3s transform linear, .3s height linear .3s;
+}
+.btn-submit:hover::after {
+  border-color: #111111;
+  height: 100%;
+  transform: translateX(0);
+  transition: .3s transform linear, .3s height linear .5s;
+}
+
+/* ── Boxes 3D animation (uiverse Nawsome) ───────────────────────────────── */
+.boxes {
+  --size: 32px;
+  --duration: 800ms;
+  height: calc(var(--size) * 2);
+  width: calc(var(--size) * 3);
+  position: relative;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+  margin-top: calc(var(--size) * 1.5 * -1);
+  transform: rotateX(60deg) rotateZ(45deg) rotateY(0deg) translateZ(0px);
+}
+.boxes .box {
+  width: var(--size);
+  height: var(--size);
+  top: 0; left: 0;
+  position: absolute;
+  transform-style: preserve-3d;
+}
+.boxes .box:nth-child(1) { transform: translate(100%, 0);    animation: box1 var(--duration) linear infinite; }
+.boxes .box:nth-child(2) { transform: translate(0, 100%);    animation: box2 var(--duration) linear infinite; }
+.boxes .box:nth-child(3) { transform: translate(100%, 100%); animation: box3 var(--duration) linear infinite; }
+.boxes .box:nth-child(4) { transform: translate(200%, 0);    animation: box4 var(--duration) linear infinite; }
+.boxes .box > div {
+  --background: #111111;
+  --top: auto; --right: auto; --bottom: auto; --left: auto;
+  --translateZ: calc(var(--size) / 2);
+  --rotateY: 0deg; --rotateX: 0deg;
+  position: absolute;
+  width: 100%; height: 100%;
+  background: var(--background);
+  top: var(--top); right: var(--right); bottom: var(--bottom); left: var(--left);
+  transform: rotateY(var(--rotateY)) rotateX(var(--rotateX)) translateZ(var(--translateZ));
+}
+.boxes .box > div:nth-child(1) { --top: 0; --left: 0; }
+.boxes .box > div:nth-child(2) { --background: #374151; --right: 0; --rotateY: 90deg; }
+.boxes .box > div:nth-child(3) { --background: #6b7280; --rotateX: -90deg; }
+.boxes .box > div:nth-child(4) { --background: #e5e7eb; --top: 0; --left: 0; --translateZ: calc(var(--size) * 3 * -1); }
+
+@keyframes box1 {
+  0%,50% { transform: translate(100%, 0); }
+  100%   { transform: translate(200%, 0); }
+}
+@keyframes box2 {
+  0%   { transform: translate(0, 100%); }
+  50%  { transform: translate(0, 0); }
+  100% { transform: translate(100%, 0); }
+}
+@keyframes box3 {
+  0%,50% { transform: translate(100%, 100%); }
+  100%   { transform: translate(0, 100%); }
+}
+@keyframes box4 {
+  0%   { transform: translate(200%, 0); }
+  50%  { transform: translate(200%, 100%); }
+  100% { transform: translate(100%, 100%); }
+}
+
+/* ── Pencil loader ───────────────────────────────────────────────────────── */
+.pencil__body1,.pencil__body2,.pencil__body3,
+.pencil__eraser,.pencil__eraser-skew,
+.pencil__point,.pencil__rotate,.pencil__stroke {
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.pencil__body1,.pencil__body2,.pencil__body3 { transform: rotate(-90deg); }
+.pencil__body1  { animation-name: pencilBody1; }
+.pencil__body2  { animation-name: pencilBody2; }
+.pencil__body3  { animation-name: pencilBody3; }
+.pencil__eraser { animation-name: pencilEraser; transform: rotate(-90deg) translate(49px,0); }
+.pencil__eraser-skew { animation-name: pencilEraserSkew; animation-timing-function: ease-in-out; }
+.pencil__point  { animation-name: pencilPoint; transform: rotate(-90deg) translate(49px,-30px); }
+.pencil__rotate { animation-name: pencilRotate; }
+.pencil__stroke { animation-name: pencilStroke; transform: translate(100px,100px) rotate(-113deg); }
+
+@keyframes pencilBody1 {
+  from,to { stroke-dashoffset:351.86; transform:rotate(-90deg); }
+  50%     { stroke-dashoffset:150.8;  transform:rotate(-225deg); }
+}
+@keyframes pencilBody2 {
+  from,to { stroke-dashoffset:406.84; transform:rotate(-90deg); }
+  50%     { stroke-dashoffset:174.36; transform:rotate(-225deg); }
+}
+@keyframes pencilBody3 {
+  from,to { stroke-dashoffset:296.88; transform:rotate(-90deg); }
+  50%     { stroke-dashoffset:127.23; transform:rotate(-225deg); }
+}
+@keyframes pencilEraser {
+  from,to { transform:rotate(-45deg) translate(49px,0); }
+  50%     { transform:rotate(0deg)   translate(49px,0); }
+}
+@keyframes pencilEraserSkew {
+  from,32.5%,67.5%,to { transform:skewX(0); }
+  35%,65%             { transform:skewX(-4deg); }
+  37.5%,62.5%         { transform:skewX(8deg); }
+  40%,45%,50%,55%,60% { transform:skewX(-15deg); }
+  42.5%,47.5%,52.5%,57.5% { transform:skewX(15deg); }
+}
+@keyframes pencilPoint {
+  from,to { transform:rotate(-90deg)  translate(49px,-30px); }
+  50%     { transform:rotate(-225deg) translate(49px,-30px); }
+}
+@keyframes pencilRotate {
+  from { transform:translate(100px,100px) rotate(0); }
+  to   { transform:translate(100px,100px) rotate(720deg); }
+}
+@keyframes pencilStroke {
+  from    { stroke-dashoffset:439.82; transform:translate(100px,100px) rotate(-113deg); }
+  50%     { stroke-dashoffset:164.93; transform:translate(100px,100px) rotate(-113deg); }
+  75%,to  { stroke-dashoffset:439.82; transform:translate(100px,100px) rotate(112deg); }
+}
