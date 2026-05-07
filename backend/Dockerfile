@@ -1,14 +1,13 @@
-# Use Eclipse Temurin JDK 17 as base image
-FROM eclipse-temurin:17-jdk-slim
-
-# Set working directory
+# Build stage: compile the Spring Boot application with Maven
+FROM mcr.microsoft.com/maven:3.9.8-jdk-17 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn -B package -DskipTests
 
-# Copy the JAR file
-COPY target/*.jar app.jar
-
-# Expose port 8080
+# Runtime stage: use a stable OpenJDK 17 runtime image
+FROM mcr.microsoft.com/openjdk/jdk:17
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Run the application
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
