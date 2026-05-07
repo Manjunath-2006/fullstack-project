@@ -6,7 +6,7 @@ COPY src ./src
 RUN mvn -B package -DskipTests
 
 # Runtime stage: use a stable OpenJDK 17 runtime image
-FROM mcr.microsoft.com/openjdk/jdk:17
+FROM mcr.microsoft.com/java/jdk:17
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
